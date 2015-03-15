@@ -6,13 +6,20 @@
 ;;; Description:
 ;;;    This file provides utilities for Gauss' Arithmetic-Geometric Mean (AGM) iteration and computing pi.
 ;;;
-;;;      Initial Conditions:  a(0) > b(0)
+;;;      Initial Conditions:  a(0) >= b(0) > 0  //  Use:  a(0) = 1  ;  b(0) = 2^(-1/2)
 ;;;
-;;;      Iteration:  a(n+1) = (1/2) * (a(n) + b(n))  ;  b(n+1) = (a(n) * b(n))^(1/2)  ;  c(n) = (1/2) * (a(n) - b(n))
+;;;      Iteration:  a(n+1) = (1/2) * (a(n) + b(n))  ;  b(n+1) = (a(n) * b(n))^(1/2)  ;  c(n+1) = (1/2) * (a(n) - b(n))
 ;;;
 ;;;      AGM(a(0), b(0)) = lim (n ==> inf) a(n) = lim (n ==> inf) b(n)
 ;;;
-;;;      pi = (4*AGM(1, 2^(-1/2))^2)/(1 - Sum(i=1 to inf) 2^(i+1)*(c(i))^2)
+;;;      pi = (4 * AGM(1, 2 ^ (-1/2)) ^ 2) / (1 - Sum(i=1 to inf) (2 ^ (i+1)) * (c(i)) ^ 2)
+;;;
+;;;    This program uses Lisp Bignums to represent (scaled) real numbers, so to
+;;;    get the actual numerical value of pi, simply shift the decimal point back
+;;;    to the left, so that it is just to the right of the first digit, i.e., 3.
+;;;
+;;;    Using a maximum number of iterations ("n") of 20 is sufficient for accurately
+;;;    computing 1 million decimal digits of pi.
 ;;;
 ;;;    References:
 ;;;
@@ -121,31 +128,31 @@
 (defun API (&optional (n 3))
   "Compute Pi using the AGM."
   (let* ((res (agm a0 b0 n))
-	 (agm (car res))
-	 (c (cdr (cadddr res))))
+         (agm (car res))
+         (c (cdr (cadddr res))))
     (/ (* 4d0 (* agm agm))
        (- 1d0
-	  (do ((i 1 (1+ i))
-	       (ci (car c) (car c))
-	       (c (cdr c) (cdr c))
-	       (sum 0d0 (+ sum (* (expt 2d0 (+ i 1))
-				  (expt ci 2)))))
-	      ((> i n) sum))))))
+          (do ((i 1 (1+ i))
+               (ci (car c) (car c))
+               (c (cdr c) (cdr c))
+               (sum 0d0 (+ sum (* (expt 2d0 (+ i 1))
+                                  (expt ci 2)))))
+              ((> i n) sum))))))
 
 (defun IPI (&optional (n 3))
   "Compute Pi using the AGM."
   (let* ((res (iagm ia0 ib0 n))
-	 (agm (car res))
-	 (c (cdr (cadddr res))))
+         (agm (car res))
+         (c (cdr (cadddr res))))
     (values 
      (round (/ (* (* 4 ia0) (* agm agm))
-	       (- (* ia0 ia0)
-		  (do ((i 1 (1+ i))
-		       (ci (car c) (car c))
-		       (c (cdr c) (cdr c))
-		       (sum 0 (+ sum (* (expt 2 (+ i 1))
-					(expt ci 2)))))
-		      ((> i n) sum))))))))
+               (- (* ia0 ia0)
+                  (do ((i 1 (1+ i))
+                       (ci (car c) (car c))
+                       (c (cdr c) (cdr c))
+                       (sum 0 (+ sum (* (expt 2 (+ i 1))
+                                        (expt ci 2)))))
+                      ((> i n) sum))))))))
 
 (defun n-digits-of-pi (digits &optional (n 20))
   "Compute DIGITS decimal places of Pi with optional number of AGM iterations N."

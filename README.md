@@ -17,6 +17,66 @@ the limiting value.
 other values. Calculating pi is simply one of the most interesting and
 accessible uses of the AGM.)
 
+The initial conditions for the AGM iteration are:
+
+`a(0) >= b(0) > 0`
+
+A good choice is:
+
+`a(0) = 1`
+
+and
+
+`b(0) = 1 / sqrt(2)`
+
+In the program, I actually use starting values of:
+
+`a(0) = 10 ^ <NumDesiredDigitsOfPi>`
+
+and
+
+`b(0) = (a(0) ^ 2) / sqrt(2 * (a(0) ^ 2))`
+
+The reason for this is that Lisp Bignums (i.e., infinite-precision
+integers) are used to represent the entire sequence of decimal digits of
+pi, rather than a floating point representation.  This way the program
+is quite short, since it builds upon the Bignum algorithms already
+provided by Lisp.
+
+The iteration is:
+
+`a(n+1) = (a(n) + b(n)) / 2`
+
+`b(n+1) = sqrt(a(n) * b(n))`
+
+`c(n+1) = (a(n) - b(n)) / 2`
+
+The Arithmetic-Geometric Mean is defined as:
+
+`AGM(a(0), b(0)) = lim (n ==> inf) a(n) = lim (n ==> inf) b(n)`
+
+In other words, in the limit as `n` tends toward infinity, `a(n)` will
+equal `b(n)`, and that value is the AGM of the initial conditions,
+`a(0)` and `b(0)`.
+
+The number of iterations required for convergence (i.e, the maximum
+value of `n`) depends upon the number of desired digits. 20 iterations
+is sufficient for computing 1 million digits of pi.
+
+Finally, the value of pi is calculated as follows:
+
+`pi = (4 * AGM(1, 1 / sqrt(2)) ^ 2) / (1 - Sum(i=1 to inf) (2 ^ (i+1)) * (c(i)) ^ 2)`
+
+and approximated in the program by:
+
+`pi = (4 * AGM(a(0), b(0)) ^ 2) / (1 - Sum(i=1 to n) (2 ^ (i+1)) * (c(i)) ^ 2)`
+
+As mentioned above, `10 ^ <NumDesiredDigitsOfPi>` is used in the place
+of `1` (i.e., `a(0)`), so consider that the output of this program is
+actually pi with the decimal point shifted all the way to the right. To
+get the actual numerical value of pi, simply shift the decimal point back
+to the left, so that it is just to the right of the first digit, i.e., `3`.
+
 ## Requirements
 
 Running this code requires the Common Lisp language.

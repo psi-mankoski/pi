@@ -1,21 +1,35 @@
 # Calculate pi via Gauss' Arithmetic-Geometric Mean (AGM) Iteration
 
 This repository contains Common Lisp code for calculating the value of
-the mathematical constant "pi" using the Arithmetic-Geometric Mean (AGM)
-iteration of Carl Friedrich Gauss.  This code has been used to calculate
-pi to over 1 million decimal places, and the results are in perfect
-agreement with references for the value of pi available on the Internet.
+the mathematical constant "pi" using the
+[Arithmetic-Geometric Mean (AGM)](http://en.wikipedia.org/wiki/Arithmetic-geometric_mean "Wikipedia AGM article")
+iteration of Carl Friedrich Gauss and Adrien-Marie Legendre. It is also
+known as the
+[Gauss-Legendre Algorithm](http://en.wikipedia.org/wiki/Gauss-Legendre_algorithm "Wikipedia Gauss-Legendre Algorithm article").
+
+Salamin [[1]](#ref1 "reference 1") and Brent [[2]](#ref2 "reference 2")
+both independently published articles proposing to use this method to
+calculate pi in 1976. This algorithm (and its descendents) [[3, p. 341]](#ref3 "reference 3")
+has been used to calculate pi to
+[trillions of decimal places](http://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80 "Wikipedia pi records article"). 
+
+This particular Common Lisp implementation of the AGM algorithm has been
+used to calculate pi to over 1 million decimal places, and the results
+are in perfect agreement with references for the values for those digits
+of pi available on the Internet.
 
 ## Mathematical Background
 
-The AGM is an extremely efficient method for calculating pi.  It
+The AGM is an extremely efficient method for calculating pi. It
 converges quadratically, which results in each successive iteration
 effectively doubling the number of significant digits in agreement with
 the limiting value.
 
-(Note that this technique can be applied to efficiently computing many
-other values. Calculating pi is simply one of the most interesting and
-accessible uses of the AGM.)
+(Note that this technique can also be applied to efficiently computing
+many other functions and constant values. Calculating pi is simply one
+of the most interesting and accessible uses of the AGM.)
+
+### Initial Conditions
 
 The initial conditions for the AGM iteration are:
 
@@ -39,9 +53,11 @@ and
 
 The reason for this is that Lisp Bignums (i.e., infinite-precision
 integers) are used to represent the entire sequence of decimal digits of
-pi, rather than a floating point representation.  This way the program
+pi, rather than a floating point representation. This way the program
 is quite short, since it builds upon the Bignum algorithms already
 provided by Lisp.
+
+### AGM Iteration
 
 The iteration is:
 
@@ -63,6 +79,8 @@ The number of iterations required for convergence (i.e, the maximum
 value of `n`) depends upon the number of desired digits. 20 iterations
 is sufficient for computing 1 million digits of pi.
 
+### Computing the Result - pi
+
 Finally, the value of pi is calculated as follows:
 
 `pi = (4 * AGM(1, 1 / sqrt(2)) ^ 2) / (1 - Sum(i=1 to inf) (2 ^ (i+1)) * (c(i)) ^ 2)`
@@ -83,15 +101,15 @@ Running this code requires the Common Lisp language.
 
 CMU Common Lisp (CMUCL) <http://www.cons.org/cmucl/> is an excellent,
 portable, open-source Common Lisp implementation that will execute this
-code correctly.  (It should also work on derivatives of CMUCL.)
+code correctly. (It should also work on derivatives of CMUCL.)
 
 ## Calculating pi
 
 To calculate pi to the desired number of decimal digits, first enter
 your Common Lisp environment. The code to calculate pi is in the file
-`AGM.lisp`.  Ideally it should be compiled and loaded into your Common
-Lisp environment.  The file provides various functions for performing
-the AGM iteration and calculating pi.
+`AGM.lisp`. Ideally it should first be compiled and then loaded into
+your Common Lisp environment. The file provides various functions for
+performing the AGM iteration and calculating pi.
 
 The easiest way to invoke the AGM iteration to compute pi is to calling
 the function `n-digits-of-pi` with the desired number of digits:
@@ -156,14 +174,16 @@ trancendental number!]
 
 This code is published under the MIT License (i.e., the "Expat License".) Pleaes see the file `LICENSE`.
 
-## Have fun!!!
+## Have Fun!!!
 
 ## References
 
-1. Eugene Salamin, "Computation of pi Using Arithmetic-Geometric Mean," _Mathematics of Computation_, volume 30, number 135, (July 1976), pages 565-570.
+1. <a name="ref1"></a>Eugene Salamin, "Computation of pi Using Arithmetic-Geometric Mean," _Mathematics of Computation_, volume 30, number 135, (July 1976), pages 565-570.
 
-2. Jonathan M. Borwein and Peter B. Borwein, _Pi and the AGM: A Study in Analytic Number Theory and Computational Complexity_, (Wiley, New York, NY, 1987).
+2. <a name="ref2"></a>Richard P. Brent, "Fast Multiple-Precision Evaluation of Elementary Functions," _Journal of the ACM_, volume 23, issue 2, (April 1976), pages 242-251.
 
-3. Dario Castellanos, "The Ubiquitous pi" (Part II), _Mathematics Magazine_, volume 61, number 3, (June 1988), pages 148-163.
+3. <a name="ref3"></a>Jonathan M. Borwein and Peter B. Borwein, _Pi and the AGM: A Study in Analytic Number Theory and Computational Complexity_, (Wiley, New York, NY, 1987).
 
-4. Jonathan M. Borwein, Peter B. Borwein, David H. Bailey, "Ramanujan, Modular Equations, and Approximations to Pi or How to Compute One Billion Digits of Pi", _The American Mathematical Monthly_, volume 96, number 3, (March 1989), pages 201-219.
+4. <a name="ref4"></a>Dario Castellanos, "The Ubiquitous pi" (Part II), _Mathematics Magazine_, volume 61, number 3, (June 1988), pages 148-163.
+
+5. <a name="ref5"></a>Jonathan M. Borwein, Peter B. Borwein, David H. Bailey, "Ramanujan, Modular Equations, and Approximations to Pi or How to Compute One Billion Digits of Pi", _The American Mathematical Monthly_, volume 96, number 3, (March 1989), pages 201-219.

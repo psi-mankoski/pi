@@ -26,13 +26,16 @@
 ;;;     [1] Eugene Salamin, "Computation of pi Using Arithmetic-Geometric Mean," _Mathematics of Computation_,
 ;;;            volume 30, number 135, (July 1976), pages 565-570.
 ;;;
-;;;     [2] Jonathan M. Borwein and Peter B. Borwein, _Pi and the AGM: A Study in Analytic Number Theory
+;;;     [2] Richard P. Brent, "Fast Multiple-Precision Evaluation of Elementary Functions," _Journal of the ACM_,
+;;;            volume 23, issue 2, (April 1976), pages 242-251.
+;;;
+;;;     [3] Jonathan M. Borwein and Peter B. Borwein, _Pi and the AGM: A Study in Analytic Number Theory
 ;;;            and Computational Complexity_, (Wiley, New York, NY, 1987).
 ;;;
-;;;     [3] Dario Castellanos, "The Ubiquitous pi" (Part II), _Mathematics Magazine_,
+;;;     [4] Dario Castellanos, "The Ubiquitous pi" (Part II), _Mathematics Magazine_,
 ;;;            volume 61, number 3, (June 1988), pages 148-163.
 ;;;
-;;;     [4] Jonathan M. Borwein, Peter B. Borwein, David H. Bailey, "Ramanujan, Modular Equations, and Approximations to Pi
+;;;     [5] Jonathan M. Borwein, Peter B. Borwein, David H. Bailey, "Ramanujan, Modular Equations, and Approximations to Pi
 ;;;            or How to Compute One Billion Digits of Pi", _The American Mathematical Monthly_,
 ;;;            volume 96, number 3, (March 1989), pages 201-219.
 ;;;

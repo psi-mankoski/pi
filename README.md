@@ -9,7 +9,7 @@ known as the
 
 Salamin [[1]](#ref1 "reference 1") and Brent [[2]](#ref2 "reference 2")
 both independently published articles proposing to use this method to
-calculate pi in 1976. This algorithm (and its descendents) [[3, p. 341]](#ref3 "reference 3")
+calculate pi in 1976. This algorithm (and its descendants) [[3, p. 341]](#ref3 "reference 3")
 has been used to calculate pi to
 [trillions of decimal places](http://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80 "Wikipedia pi records article"). 
 
@@ -119,7 +119,7 @@ the function `n-digits-of-pi` with the desired number of digits:
 Here is example output using CMUCL on a Mac Pro computer: [Note that the
 values computed below differ from the reference in the last 2 decimal
 places as they are, of course, only approximations to an unending
-trancendental number!]
+transcendental number!]
 
 	[spiritowl:/Users/psi/Lisp/AGM/14Mar15]
 	% cmucl
@@ -172,7 +172,7 @@ trancendental number!]
 
 ## License
 
-This code is published under the MIT License (i.e., the "Expat License".) Pleaes see the file `LICENSE`.
+This code is published under the MIT License (i.e., the "Expat License".) Please see the file `LICENSE`.
 
 ## Have Fun!!!
 

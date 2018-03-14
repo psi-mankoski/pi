@@ -128,8 +128,9 @@ multiplication.  The GNU Multiple Precision (GMP) Arithmetic Library
 ### 2 Giga Decimal Digits of pi
 
 Here is an example of calculating pi to greater than 2 billion decimal
-places using SBCL and GMP. The computer is an HP Omen X desktop with an
-Intel Core i7-7700K CPU @ 4.2 GHz and 32 GB RAM running Fedora 27 Linux.
+places using SBCL and GMP. The computer is an HP Omen X 900-140VT
+desktop with an Intel Core i7-7700K CPU @ 4.2 GHz and 32 GB RAM running
+Fedora 27 Linux.
 
 	[v4.valis.com:/home/psi/sw/github.com/pi]
 	% sbcl --dynamic-space-size 64Gb

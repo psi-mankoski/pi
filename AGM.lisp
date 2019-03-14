@@ -221,3 +221,11 @@
      (with-open-file (outfile filename :direction :output)
        (format outfile "~D" api)))
     api))
+
+(defun write-number (n filename &optional (base 10.))
+  "Write a number N to FILENAME in ASCII format in the given BASE (defaulting to decimal.)."
+  (format t "~&Last ~D hex digits: ~X~&" *Last-N-Digits* (mod n (expt 16 *Last-N-Digits*)))
+  (time
+   (with-open-file (outfile filename :direction :output)
+     (write n :base base :stream outfile)))
+  t)

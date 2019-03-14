@@ -1,0 +1,128 @@
+[v5.valis.com:/home/psi/sw/github.com/pi]
+% sbcl --dynamic-space-size 200Gb
+This is SBCL 1.4.6-2.fc29, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* (compile-file "AGM")
+
+; compiling file "/home/psi/sw/github.com/pi/AGM.lisp" (written 13 MAR 2019 12:03:32 PM):
+; compiling (REQUIRE :SB-GMP)
+; compiling (FORMAT T ...)Installing GMP functions.
+; compiling (REQUIRE :SB-GMP)
+; compiling (SB-GMP:INSTALL-GMP-FUNS)
+; compiling (DEFVAR A0 ...)
+; compiling (DEFVAR B0 ...)
+; compiling (DEFVAR *I-NUM-DIGITS* ...)
+; compiling (DEFVAR *LAST-N-DIGITS* ...)
+; compiling (DEFVAR *LOG-GC-ROOM* ...)
+; compiling (DEFVAR IA0 ...)
+; compiling (DEFVAR IA0^2 ...)
+; compiling (DEFVAR IB0 ...)
+; compiling (DEFUN FORMAT-TIME ...)
+; compiling (DEFUN LOG-ITERATION ...)
+; compiling (DEFUN DO-GC ...)
+; compiling (DEFUN AGM ...)
+; compiling (DEFUN IAGM ...)
+; compiling (DEFUN API ...)
+; compiling (DEFUN IPI ...)
+; compiling (DEFUN N-DIGITS-OF-PI ...)
+; compiling (DEFUN WRITE-N-DIGITS-OF-PI ...)
+; compiling (DEFUN WRITE-NUMBER ...)
+
+; /home/psi/sw/github.com/pi/AGM.fasl written
+; compilation finished in 0:00:00.078
+#P"/home/psi/sw/github.com/pi/AGM.fasl"
+NIL
+NIL
+* (load "AGM")
+Installing GMP functions.
+T
+* (defvar n (expt 2 32))
+
+N
+* (defvar i (ceiling (log n 2)))
+
+I
+* i
+
+32
+* n
+
+4294967296
+* (defvar api 3)
+
+API
+* (time (progn (setq api (write-n-digits-of-pi n i t "Pi.4G.GMP.v5.1.4.6-2.fc29.13Mar19")) t))
+
+Starting up -- Wednesday, March 13, 2019 12:09:31 PM PDT (3761492971)
+Iteration: 0 -- Wednesday, March 13, 2019 02:38:20 PM PDT (3761501900)
+Iteration: 1 -- Wednesday, March 13, 2019 02:47:39 PM PDT (3761502459)
+Iteration: 2 -- Wednesday, March 13, 2019 02:57:44 PM PDT (3761503064)
+Iteration: 3 -- Wednesday, March 13, 2019 03:07:07 PM PDT (3761503627)
+Iteration: 4 -- Wednesday, March 13, 2019 03:16:10 PM PDT (3761504170)
+Iteration: 5 -- Wednesday, March 13, 2019 03:25:16 PM PDT (3761504716)
+Iteration: 6 -- Wednesday, March 13, 2019 03:34:22 PM PDT (3761505262)
+Iteration: 7 -- Wednesday, March 13, 2019 03:43:44 PM PDT (3761505824)
+Iteration: 8 -- Wednesday, March 13, 2019 03:53:25 PM PDT (3761506405)
+Iteration: 9 -- Wednesday, March 13, 2019 04:02:29 PM PDT (3761506949)
+Iteration: 10 -- Wednesday, March 13, 2019 04:11:46 PM PDT (3761507506)
+Iteration: 11 -- Wednesday, March 13, 2019 04:20:51 PM PDT (3761508051)
+Iteration: 12 -- Wednesday, March 13, 2019 04:30:06 PM PDT (3761508606)
+Iteration: 13 -- Wednesday, March 13, 2019 04:39:12 PM PDT (3761509152)
+Iteration: 14 -- Wednesday, March 13, 2019 04:48:18 PM PDT (3761509698)
+Iteration: 15 -- Wednesday, March 13, 2019 04:57:25 PM PDT (3761510245)
+Iteration: 16 -- Wednesday, March 13, 2019 05:06:35 PM PDT (3761510795)
+Iteration: 17 -- Wednesday, March 13, 2019 05:15:41 PM PDT (3761511341)
+Iteration: 18 -- Wednesday, March 13, 2019 05:24:47 PM PDT (3761511887)
+Iteration: 19 -- Wednesday, March 13, 2019 05:34:05 PM PDT (3761512445)
+Iteration: 20 -- Wednesday, March 13, 2019 05:43:08 PM PDT (3761512988)
+Iteration: 21 -- Wednesday, March 13, 2019 05:52:13 PM PDT (3761513533)
+Iteration: 22 -- Wednesday, March 13, 2019 06:01:18 PM PDT (3761514078)
+Iteration: 23 -- Wednesday, March 13, 2019 06:10:22 PM PDT (3761514622)
+Iteration: 24 -- Wednesday, March 13, 2019 06:19:28 PM PDT (3761515168)
+Iteration: 25 -- Wednesday, March 13, 2019 06:28:34 PM PDT (3761515714)
+Iteration: 26 -- Wednesday, March 13, 2019 06:37:43 PM PDT (3761516263)
+Iteration: 27 -- Wednesday, March 13, 2019 06:46:52 PM PDT (3761516812)
+Iteration: 28 -- Wednesday, March 13, 2019 06:55:53 PM PDT (3761517353)
+Iteration: 29 -- Wednesday, March 13, 2019 07:04:55 PM PDT (3761517895)
+Iteration: 30 -- Wednesday, March 13, 2019 07:13:47 PM PDT (3761518427)
+Iteration: 31 -- Wednesday, March 13, 2019 07:22:24 PM PDT (3761518944)
+Done! -- Thursday, March 14, 2019 12:41:04 AM PDT (3761538064)
+Evaluation took:
+  45093.154 seconds of real time
+  44731.558009 seconds of total run time (43570.747162 user, 1160.810847 system)
+  [ Run times consist of 20.055 seconds GC time, and 44711.504 seconds non-GC time. ]
+  99.20% CPU
+  143,937,723,655,703 processor cycles
+  1,391,460 page faults
+  991,777,058,272 bytes consed
+  
+Last 1000 digits: 3413657859666896267821877044446158661445456612159941518254445963559201522341365127456887060882957489968358233131890658207279642485508525070184914608491211125036480205284190848991702134930428895203012950823781460486606178596751430718031721969184922573793749862252280816955064385594066652888017199497528117993669892856213609441085590936023678406836646108636259565319453421722926623323119208760323213437985636317261585046370726456255506553357866774498614095208650951958054986235582473898875741245401010901630657861825676608660450022044628298621138269606178787747110896696785254404959874260776266872524370672125477742380670740543693781591839873600478582959954778848457767260510380338430307408756194119972754253482862025991572003117846657075674120822415937560343046459136328647689611078014979653744733588651771897986360657267444446749976063496863897229086373751472665965036432501622069780721382670293029726472848638424612562001105967875069167292166652527817388293343234635525725113327148905270472422262233
+Evaluation took:
+  2067.497 seconds of real time
+  2061.938434 seconds of total run time (2020.426410 user, 41.512024 system)
+  [ Run times consist of 0.778 seconds GC time, and 2061.161 seconds non-GC time. ]
+  99.73% CPU
+  6,599,466,043,592 processor cycles
+  945 page faults
+  124,723,175,776 bytes consed
+  
+Evaluation took:
+  47171.840 seconds of real time
+  46804.602278 seconds of total run time (45599.442467 user, 1205.159811 system)
+  [ Run times consist of 22.547 seconds GC time, and 46782.056 seconds non-GC time. ]
+  99.22% CPU
+  150,572,910,935,924 processor cycles
+  1,392,586 page faults
+  1,120,067,159,968 bytes consed
+  
+T
+* (quit)
+[v5.valis.com:/home/psi/sw/github.com/pi]
+% exit
+
+Process shell finished

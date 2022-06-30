@@ -14,7 +14,7 @@ has been used to calculate pi to
 [trillions of decimal places](http://en.wikipedia.org/wiki/Chronology_of_computation_of_%CF%80 "Wikipedia pi records article"). 
 
 This particular Common Lisp implementation of the AGM algorithm has been
-used to calculate pi to over 1 million decimal places, and the results
+used to calculate pi to over 4 billion decimal places, and the results
 are in perfect agreement with references for the values for those digits
 of pi available on the Internet.
 
@@ -125,16 +125,17 @@ and memory space constraints, it is advisable to use FFT-based
 multiplication.  The GNU Multiple Precision (GMP) Arithmetic Library
 <http://gmplib.org/> transparently plugs into SBCL's bignum operations.
 
-### 2 Giga Decimal Digits of pi
+### 4 Giga Decimal Digits of pi
 
-Here is an example of calculating pi to greater than 2 billion decimal
-places using SBCL and GMP. The computer is an HP Omen X 900-140VT
-desktop with an Intel Core i7-7700K CPU @ 4.2 GHz and 32 GB RAM running
-Fedora 27 Linux.
+Here is an example of calculating pi to greater than 4 billion decimal
+places using SBCL and GMP. The computer is an HP Omen Obelisk 875-0014
+desktop with an Intel Core i7-8700 CPU @ 3.20 GHz processor (max. turbo
+boost frequency: 4.60 GHz; 6 cores / 12 threads) and 32 GB RAM running
+Fedora 29 Linux:
 
-	[v4.valis.com:/home/psi/sw/github.com/pi]
-	% sbcl --dynamic-space-size 64Gb
-	This is SBCL 1.4.2-1.fc27, an implementation of ANSI Common Lisp.
+	[v5.valis.com:/home/psi/sw/github.com/pi]
+	% sbcl --dynamic-space-size 200Gb
+	This is SBCL 1.4.6-2.fc29, an implementation of ANSI Common Lisp.
 	More information about SBCL is available at <http://www.sbcl.org/>.
 
 	SBCL is free software, provided as is, with absolutely no warranty.
@@ -143,7 +144,7 @@ Fedora 27 Linux.
 	distribution for more information.
 	* (compile-file "AGM")
 
-	; compiling file "/home/psi/sw/github.com/pi/AGM.lisp" (written 13 MAR 2018 04:51:15 AM):
+	; compiling file "/home/psi/sw/github.com/pi/AGM.lisp" (written 13 MAR 2019 12:03:32 PM):
 	; compiling (REQUIRE :SB-GMP)
 	; compiling (FORMAT T ...)Installing GMP functions.
 	; compiling (REQUIRE :SB-GMP)
@@ -165,96 +166,98 @@ Fedora 27 Linux.
 	; compiling (DEFUN IPI ...)
 	; compiling (DEFUN N-DIGITS-OF-PI ...)
 	; compiling (DEFUN WRITE-N-DIGITS-OF-PI ...)
+	; compiling (DEFUN WRITE-NUMBER ...)
 
 	; /home/psi/sw/github.com/pi/AGM.fasl written
-	; compilation finished in 0:00:00.027
+	; compilation finished in 0:00:00.078
 	#P"/home/psi/sw/github.com/pi/AGM.fasl"
 	NIL
 	NIL
 	* (load "AGM")
 	Installing GMP functions.
 	T
-	* (defvar n (expt 2 31))
+	* (defvar n (expt 2 32))
 
 	N
 	* (defvar i (ceiling (log n 2)))
 
 	I
-	* n
-
-	2147483648
 	* i
 
-	31
+	32
+	* n
+
+	4294967296
 	* (defvar api 3)
 
 	API
-	* (time (progn (setq api (write-n-digits-of-pi n i t "Pi.2G.GMP.v4.1.4.2-1.fc27.13Mar18")) t))
+	* (time (progn (setq api (write-n-digits-of-pi n i t "Pi.4G.GMP.v5.1.4.6-2.fc29.13Mar19")) t))
 
-	Starting up -- Tuesday, March 13, 2018 05:14:23 AM PDT (3729932063)
-	Iteration: 0 -- Tuesday, March 13, 2018 06:28:41 AM PDT (3729936521)
-	Iteration: 1 -- Tuesday, March 13, 2018 06:33:31 AM PDT (3729936811)
-	Iteration: 2 -- Tuesday, March 13, 2018 06:38:20 AM PDT (3729937100)
-	Iteration: 3 -- Tuesday, March 13, 2018 06:43:09 AM PDT (3729937389)
-	Iteration: 4 -- Tuesday, March 13, 2018 06:47:58 AM PDT (3729937678)
-	Iteration: 5 -- Tuesday, March 13, 2018 06:52:47 AM PDT (3729937967)
-	Iteration: 6 -- Tuesday, March 13, 2018 06:57:36 AM PDT (3729938256)
-	Iteration: 7 -- Tuesday, March 13, 2018 07:02:25 AM PDT (3729938545)
-	Iteration: 8 -- Tuesday, March 13, 2018 07:07:14 AM PDT (3729938834)
-	Iteration: 9 -- Tuesday, March 13, 2018 07:12:03 AM PDT (3729939123)
-	Iteration: 10 -- Tuesday, March 13, 2018 07:16:53 AM PDT (3729939413)
-	Iteration: 11 -- Tuesday, March 13, 2018 07:21:42 AM PDT (3729939702)
-	Iteration: 12 -- Tuesday, March 13, 2018 07:26:31 AM PDT (3729939991)
-	Iteration: 13 -- Tuesday, March 13, 2018 07:31:21 AM PDT (3729940281)
-	Iteration: 14 -- Tuesday, March 13, 2018 07:36:10 AM PDT (3729940570)
-	Iteration: 15 -- Tuesday, March 13, 2018 07:40:59 AM PDT (3729940859)
-	Iteration: 16 -- Tuesday, March 13, 2018 07:45:48 AM PDT (3729941148)
-	Iteration: 17 -- Tuesday, March 13, 2018 07:50:37 AM PDT (3729941437)
-	Iteration: 18 -- Tuesday, March 13, 2018 07:55:26 AM PDT (3729941726)
-	Iteration: 19 -- Tuesday, March 13, 2018 08:00:16 AM PDT (3729942016)
-	Iteration: 20 -- Tuesday, March 13, 2018 08:05:04 AM PDT (3729942304)
-	Iteration: 21 -- Tuesday, March 13, 2018 08:09:53 AM PDT (3729942593)
-	Iteration: 22 -- Tuesday, March 13, 2018 08:14:42 AM PDT (3729942882)
-	Iteration: 23 -- Tuesday, March 13, 2018 08:19:30 AM PDT (3729943170)
-	Iteration: 24 -- Tuesday, March 13, 2018 08:24:19 AM PDT (3729943459)
-	Iteration: 25 -- Tuesday, March 13, 2018 08:29:09 AM PDT (3729943749)
-	Iteration: 26 -- Tuesday, March 13, 2018 08:33:58 AM PDT (3729944038)
-	Iteration: 27 -- Tuesday, March 13, 2018 08:38:45 AM PDT (3729944325)
-	Iteration: 28 -- Tuesday, March 13, 2018 08:43:32 AM PDT (3729944612)
-	Iteration: 29 -- Tuesday, March 13, 2018 08:48:14 AM PDT (3729944894)
-	Iteration: 30 -- Tuesday, March 13, 2018 08:52:47 AM PDT (3729945167)
-	Done! -- Tuesday, March 13, 2018 11:36:04 AM PDT (3729954964)
+	Starting up -- Wednesday, March 13, 2019 12:09:31 PM PDT (3761492971)
+	Iteration: 0 -- Wednesday, March 13, 2019 02:38:20 PM PDT (3761501900)
+	Iteration: 1 -- Wednesday, March 13, 2019 02:47:39 PM PDT (3761502459)
+	Iteration: 2 -- Wednesday, March 13, 2019 02:57:44 PM PDT (3761503064)
+	Iteration: 3 -- Wednesday, March 13, 2019 03:07:07 PM PDT (3761503627)
+	Iteration: 4 -- Wednesday, March 13, 2019 03:16:10 PM PDT (3761504170)
+	Iteration: 5 -- Wednesday, March 13, 2019 03:25:16 PM PDT (3761504716)
+	Iteration: 6 -- Wednesday, March 13, 2019 03:34:22 PM PDT (3761505262)
+	Iteration: 7 -- Wednesday, March 13, 2019 03:43:44 PM PDT (3761505824)
+	Iteration: 8 -- Wednesday, March 13, 2019 03:53:25 PM PDT (3761506405)
+	Iteration: 9 -- Wednesday, March 13, 2019 04:02:29 PM PDT (3761506949)
+	Iteration: 10 -- Wednesday, March 13, 2019 04:11:46 PM PDT (3761507506)
+	Iteration: 11 -- Wednesday, March 13, 2019 04:20:51 PM PDT (3761508051)
+	Iteration: 12 -- Wednesday, March 13, 2019 04:30:06 PM PDT (3761508606)
+	Iteration: 13 -- Wednesday, March 13, 2019 04:39:12 PM PDT (3761509152)
+	Iteration: 14 -- Wednesday, March 13, 2019 04:48:18 PM PDT (3761509698)
+	Iteration: 15 -- Wednesday, March 13, 2019 04:57:25 PM PDT (3761510245)
+	Iteration: 16 -- Wednesday, March 13, 2019 05:06:35 PM PDT (3761510795)
+	Iteration: 17 -- Wednesday, March 13, 2019 05:15:41 PM PDT (3761511341)
+	Iteration: 18 -- Wednesday, March 13, 2019 05:24:47 PM PDT (3761511887)
+	Iteration: 19 -- Wednesday, March 13, 2019 05:34:05 PM PDT (3761512445)
+	Iteration: 20 -- Wednesday, March 13, 2019 05:43:08 PM PDT (3761512988)
+	Iteration: 21 -- Wednesday, March 13, 2019 05:52:13 PM PDT (3761513533)
+	Iteration: 22 -- Wednesday, March 13, 2019 06:01:18 PM PDT (3761514078)
+	Iteration: 23 -- Wednesday, March 13, 2019 06:10:22 PM PDT (3761514622)
+	Iteration: 24 -- Wednesday, March 13, 2019 06:19:28 PM PDT (3761515168)
+	Iteration: 25 -- Wednesday, March 13, 2019 06:28:34 PM PDT (3761515714)
+	Iteration: 26 -- Wednesday, March 13, 2019 06:37:43 PM PDT (3761516263)
+	Iteration: 27 -- Wednesday, March 13, 2019 06:46:52 PM PDT (3761516812)
+	Iteration: 28 -- Wednesday, March 13, 2019 06:55:53 PM PDT (3761517353)
+	Iteration: 29 -- Wednesday, March 13, 2019 07:04:55 PM PDT (3761517895)
+	Iteration: 30 -- Wednesday, March 13, 2019 07:13:47 PM PDT (3761518427)
+	Iteration: 31 -- Wednesday, March 13, 2019 07:22:24 PM PDT (3761518944)
+	Done! -- Thursday, March 14, 2019 12:41:04 AM PDT (3761538064)
 	Evaluation took:
-	  22900.452 seconds of real time
-	  22576.415954 seconds of total run time (22074.843200 user, 501.572754 system)
-	  [ Run times consist of 8.507 seconds GC time, and 22567.909 seconds non-GC time. ]
-	  98.59% CPU
-	  96,182,040,596,429 processor cycles
-	  5,613 page faults
-	  492,957,260,048 bytes consed
+	  45093.154 seconds of real time
+	  44731.558009 seconds of total run time (43570.747162 user, 1160.810847 system)
+	  [ Run times consist of 20.055 seconds GC time, and 44711.504 seconds non-GC time. ]
+	  99.20% CPU
+	  143,937,723,655,703 processor cycles
+	  1,391,460 page faults
+	  991,777,058,272 bytes consed
 
-	Last 1000 digits: 6128707026157903694208731094423927151484727659291015323586535496516098827178407885688643568025181090091530458419892577486892186560755618696108787719283846369922146190927112971885922784316457070195492971052705843648446073166071523302817989435029562098080856244140348601980681522403014411225939628325397723846695577390411526185829432696933580512778382430216594959784787209780298790435175641407731492576964230577791151385265884938913307130848637305380640159175861923453943406911863006823994986834301187525392831225877735117707188467394301950440652082600221127090443290885861597716695218025967387969247149572303646478452345633177858789671444424956331771536675271541326122415912451639126443695034189180852090439726109561340993744270575843386797985880803984065390547399268509824206264882331104212317866073185185616880547848252456756952818795517001764796226381868552208049914757611820073576843021064567048710589617237926447442382673655600511704783223650544693156176377410057169385546980184129084150913685047
+	Last 1000 digits: 3413657859666896267821877044446158661445456612159941518254445963559201522341365127456887060882957489968358233131890658207279642485508525070184914608491211125036480205284190848991702134930428895203012950823781460486606178596751430718031721969184922573793749862252280816955064385594066652888017199497528117993669892856213609441085590936023678406836646108636259565319453421722926623323119208760323213437985636317261585046370726456255506553357866774498614095208650951958054986235582473898875741245401010901630657861825676608660450022044628298621138269606178787747110896696785254404959874260776266872524370672125477742380670740543693781591839873600478582959954778848457767260510380338430307408756194119972754253482862025991572003117846657075674120822415937560343046459136328647689611078014979653744733588651771897986360657267444446749976063496863897229086373751472665965036432501622069780721382670293029726472848638424612562001105967875069167292166652527817388293343234635525725113327148905270472422262233
 	Evaluation took:
-	  1042.057 seconds of real time
-	  1030.160749 seconds of total run time (1012.204770 user, 17.955979 system)
-	  [ Run times consist of 0.387 seconds GC time, and 1029.774 seconds non-GC time. ]
-	  98.86% CPU
-	  4,376,646,281,829 processor cycles
-	  18 page faults
-	  60,577,879,792 bytes consed
+	  2067.497 seconds of real time
+	  2061.938434 seconds of total run time (2020.426410 user, 41.512024 system)
+	  [ Run times consist of 0.778 seconds GC time, and 2061.161 seconds non-GC time. ]
+	  99.73% CPU
+	  6,599,466,043,592 processor cycles
+	  945 page faults
+	  124,723,175,776 bytes consed
 
 	Evaluation took:
-	  23948.350 seconds of real time
-	  23612.072933 seconds of total run time (23091.541596 user, 520.531337 system)
-	  [ Run times consist of 9.464 seconds GC time, and 23602.609 seconds non-GC time. ]
-	  98.60% CPU
-	  100,583,218,195,302 processor cycles
-	  5,704 page faults
-	  555,318,619,200 bytes consed
+	  47171.840 seconds of real time
+	  46804.602278 seconds of total run time (45599.442467 user, 1205.159811 system)
+	  [ Run times consist of 22.547 seconds GC time, and 46782.056 seconds non-GC time. ]
+	  99.22% CPU
+	  150,572,910,935,924 processor cycles
+	  1,392,586 page faults
+	  1,120,067,159,968 bytes consed
 
 	T
 	* (quit)
-	[v4.valis.com:/home/psi/sw/github.com/pi]
+	[v5.valis.com:/home/psi/sw/github.com/pi]
 	%
 
 Here is an example run computing 1,024 decimal places of pi using CMUCL
